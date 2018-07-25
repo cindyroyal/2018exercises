@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<title>Pie Chart - User Input</title>  
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
+    .chart {
+    width: 100%;
+    }
+    
+    #piechart {
+    height: 600px;
+    }
+    
+    label {
+    display: block;
+    }
+    
+</style>
+</head>
+<body>
+<p>How many hours do you spend:</p>
+    <form id="form1" onsubmit="drawChart(); return false" >
+     <label>Working: <input type="text" id="workvar"></label>
+     <label>Eating: <input type="text"  id="eatvar"></label>
+     <label>Commuting: <input type="text"  id="commutevar"></label>
+     <label>Watching tv: <input type="text" id="tvvar"></label>
+     <label>Sleeping: <input type="text"  id="sleepvar"></label>
+     <label>Other: <input type="text" id="othervar"></label>
+         
+     <button type="submit" value="Submit">Submit</button>
+     </form>
+ <div class="chart">
+    <div id="piechart"></div>
+ </div>  
+ 
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+     
+     //submit requires these to use parseInt to work in chart
+      function drawChart() {
+       work = parseInt(document.getElementById('workvar').value);
+       eat = parseInt(document.getElementById('eatvar').value);
+       commute = parseInt(document.getElementById('commutevar').value);
+       tv = parseInt(document.getElementById('tvvar').value);
+       sleep = parseInt(document.getElementById('sleepvar').value);
+       other = parseInt(document.getElementById('othervar').value);
+       
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Week'],
+          ['Work',     work],
+          ['Eat',      eat],
+          ['Commute',  commute],
+          ['Watch TV', tv],
+          ['Sleep',    sleep],
+          ['Other',    other]
+        ]);
+        var options = {
+          title: 'Weekly Activities'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script> 
+      
+</body>
+</html>

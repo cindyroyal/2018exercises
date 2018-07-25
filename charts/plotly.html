@@ -1,0 +1,86 @@
+<html>
+<head>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+<body>
+<form id="form1" onchange="drawChart()">
+<select id="thedropdown">
+<option value="txst">Texas State</option>
+<option value="ut">UT</option>
+</select>
+</form>
+
+<div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+<script>
+   info = [{school: "ut", program: "compsci", male: 78, female: 22},
+{school: "txst", program: "compsci", male: 84, female: 16},
+{school: "ut", program: "dmi", male: 0, female: 0},
+{school: "txst", program: "dmi", male: 50, female: 50},
+{school: "txst", program: "journ", male: 39, female: 61},
+{school: "ut", program: "journ", male: 26, female: 74},
+];
+    var csmale; 
+var csfemale;
+var dmimale;
+var dmifemale; 
+var journmale; 
+var journfemale;
+
+//initial view of chart 
+drawChart();
+    
+    
+    function drawChart() {
+      
+        
+myschool = document.getElementById("thedropdown").value;
+for(i=0;i<info.length; i++){
+if(myschool == info[i].school){
+
+if(info[i].program == "compsci"){
+csmale = info[i].male;
+csfemale = info[i].female;
+}
+
+if(info[i].program == "dmi"){
+dmimale = info[i].male;
+dmifemale = info[i].female;
+}
+
+if(info[i].program == "journ"){
+journmale = info[i].male;
+journfemale = info[i].female;
+}
+}
+}
+
+//plotly code for two bars 
+var trace1 = {
+x: ['Computer Science', 'Journalism/Ad', 'DMI'], 
+y: [csmale, journmale, dmimale], 
+name: 'Male', 
+type: 'bar'
+};
+
+var trace2 = {
+x: ['Computer Science', 'Journalism/Ad', 'DMI'], 
+y: [csfemale, journfemale, dmifemale], 
+name: 'Female', 
+type: 'bar'
+};
+
+var data = [trace1, trace2];
+var layout = {
+barmode: 'group',
+yaxis: {range: [0, 100]}
+};
+
+Plotly.newPlot('myDiv', data, layout, {displayModeBar: false});
+}
+      
+    
+    </script>
+
+</body>
+</html>

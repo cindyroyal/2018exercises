@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #main {
+            width: 60%;
+        }
+        
+        #chart1 {
+        
+        }
+        
+        #chart2 {
+          display: none;    
+            
+        }
+    </style>
+</head>
+<body>
+    <select id="dropdown">
+    <option value="1">Chart 1</option>
+        <option value="2">Chart 2</option>
+    </select>
+<div id="main">
+<div id="chart1">
+<div class="flourish-embed" data-src="visualisation/79525"></div><script src="https://public.flourish.studio/resources/embed.js"></script>
+    </div>
+    <div id="chart2">
+<div class="flourish-embed" data-src="visualisation/79552"></div>
+    </div></div>
+    
+    
+    <script>
+    document.getElementById("dropdown").onchange = function() {
+        chart = document.getElementById("dropdown").value;
+        if(chart == 1) {
+            document.getElementById("chart2").style.display = "none";
+            document.getElementById("chart1").style.display = "block";
+
+        }
+        if(chart == 2) {
+            document.getElementById("chart2").style.display = "block";
+            document.getElementById("chart1").style.display = "none";
+
+        }
+    }
+    
+    </script>
+</body>
+    
+    
+</html>
+
+
